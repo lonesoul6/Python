@@ -1,0 +1,4 @@
+Hello python
+First line of the file
+learning python in udemy is kindah cool
+lets hope for the good
