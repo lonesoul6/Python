@@ -20,29 +20,4 @@ db_params = {
     }
 }}
 
-# Append the endpoint ID option to the connection string
-db_params['host'] += f'?options=endpoint%3D{os.getenv("ENDPOINT_ID")}'
 
-# Connect to the database
-try:
-    connection = psycopg2.connect(**db_params)
-    cursor = connection.cursor()
-    print("Connection to NeonDB established successfully!")
-    
-    # Execute a SQL query
-    cursor.execute("SELECT * FROM your_table")
-    rows = cursor.fetchall()
-    
-    # Print the results
-    for row in rows:
-        print(row)
-
-except Exception as error:
-    print(f"Error connecting to NeonDB: {error}")
-
-# Close the connection
-finally:
-    if connection:
-        cursor.close()
-        connection.close()
-        print("Connection closed.")
