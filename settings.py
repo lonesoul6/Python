@@ -1,23 +1,20 @@
-# Add these at the top of your settings.py
-from os import getenv
-from dotenv import load_dotenv
-import psycopg2
+import environ
 
-# Load environment variables from .env file
-load_dotenv()
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
-# Define your database connection parameters from environment variables
-db_params = {
-    'default': {
+DATABASES = {
+  'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': getenv('PGDATABASE'),
-    'USER': getenv('PGUSER'),
-    'PASSWORD': getenv('PGPASSWORD'),
-    'HOST': getenv('PGHOST'),
-    'PORT': getenv('PGPORT', 5432),
+    'NAME': env('PGDATABASE'),
+    'USER': env('PGUSER'),
+    'PASSWORD': env('PGPASSWORD'),
+    'HOST': env('PGHOST'),
+    'PORT': env.int('PGPORT', default=5432),
     'OPTIONS': {
       'sslmode': 'require',
-    }
-}}
-
+    },
+  }
+}
 
